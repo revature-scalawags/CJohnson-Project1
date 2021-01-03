@@ -1,5 +1,39 @@
 package main
 
-object Main extends App {
+import org.apache.hadoop.fs.Path
+import org.apache.hadoop.io.IntWritable
+import org.apache.hadoop.io.Text
+import org.apache.hadoop.mapreduce.Job
+import org.apache.hadoop.mapreduce.lib.input.TextInputFormat
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat
 
+import song.Song
+import mapReduce.artistPopularity.ArtistPopMapper
+import mapReduce.artistPopularity.ArtistPopReducer
+
+object Main extends App {
+  
+  if (args.length != 2) {
+    println("Usage: Main [input dir] [output dir]")
+    System.exit(-1)
+  }
+
+  val job = Job.getInstance()
+
+  job.setJarByClass(Main.getClass())
+  job.setJobName("Spotify Analysis")
+  job.setInputFormatClass(classOf[TextInputFormat])
+
+  FileInputFormat.setInputPaths(job, new Path(args(0)))
+  FileOutputFormat.setOutputPath(job, new Path(args(1)))
+
+  job.setMapperClass(classOf[ArtistPopMapper])
+  job.setReducerClass(classOf[ArtistPopReducer])
+
+  job.setOutputKeyClass(classOf[Text])
+  job.setOutputValueClass(classOf[IntWritable])
+
+  val success = job.waitForCompletion(true)
+  System.exit(if (success) 0 else 1)
 }
