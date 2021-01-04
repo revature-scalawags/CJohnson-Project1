@@ -14,9 +14,15 @@ class TempoVsDanceReducer extends Reducer[Text, IntWritable, Text, IntWritable] 
   ): Unit = {
     
     var danceability = 0
+    var count = 0
 
-    values.forEach(danceability += _.get())
-    context.write(key, new IntWritable(danceability))
+    values.forEach({d => 
+      danceability += d.get()
+      count += 1
+    })
+
+    var average = danceability / count
+    context.write(key, new IntWritable(average))
   }
 }
 

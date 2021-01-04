@@ -9,7 +9,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat
 
 import mapReduce.artistPopularity.{ArtistPopMapper, ArtistPopReducer}
-import mapReduce.tempoVsDance.{TempoVsDanceCombiner, TempoVsDanceMapper, TempoVsDanceReducer}
+import mapReduce.tempoVsDance.{TempoVsDanceMapper, TempoVsDanceReducer}
 
 
 /** Application using Scala and Hadoop to process Spotify song data */
@@ -44,7 +44,6 @@ object Main extends App {
       }
       case "-tvd" => {
         job.setMapperClass(classOf[TempoVsDanceMapper])
-        //job.setCombinerClass(classOf[TempoVsDanceCombiner])
         job.setReducerClass(classOf[TempoVsDanceReducer])
 
         job.setOutputKeyClass(classOf[Text])
