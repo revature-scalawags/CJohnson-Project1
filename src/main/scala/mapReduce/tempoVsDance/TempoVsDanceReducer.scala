@@ -5,7 +5,7 @@ import org.apache.hadoop.io.Text
 import org.apache.hadoop.io.IntWritable
 
 
-/** Mapper class for getting average danceability for each tempo represented in the data set */
+/** Reducer class for getting average danceability for each tempo represented in the data set */
 class TempoVsDanceReducer extends Reducer[Text, IntWritable, Text, IntWritable] {
   
   override def reduce(
