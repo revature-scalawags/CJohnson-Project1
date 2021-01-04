@@ -7,6 +7,8 @@ import org.apache.hadoop.io.Text
 
 import song.Song
 
+
+/** Mapper class for getting total popularity for each artist represented in the data set */
 class ArtistPopMapper extends Mapper[LongWritable, Text, Text, IntWritable] {
   override def map(
     key: LongWritable,
