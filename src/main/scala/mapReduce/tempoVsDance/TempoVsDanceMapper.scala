@@ -9,6 +9,7 @@ import song.Song
 
 /** Mapper class for getting average danceability for each tempo represented in the data set */
 class TempoVsDanceMapper extends Mapper[LongWritable, Text, Text, IntWritable] {
+  
   override def map(
     key: LongWritable,
     value: Text,
