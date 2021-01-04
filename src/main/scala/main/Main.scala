@@ -46,7 +46,7 @@ object Main extends App {
     job.setOutputValueClass(classOf[IntWritable])
 
     args(0) match {
-      case "-pop" => {
+      case "-avp" => {
         job.setMapperClass(classOf[ArtistPopMapper])
         job.setReducerClass(classOf[ArtistPopReducer])
       }
