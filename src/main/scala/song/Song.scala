@@ -1,5 +1,7 @@
 package song
 
+
+/** The song object maps the name of each field in the input csv to its index (column number) */
 object Song {
   val VALENCE = 0
   val YEAR = 1
