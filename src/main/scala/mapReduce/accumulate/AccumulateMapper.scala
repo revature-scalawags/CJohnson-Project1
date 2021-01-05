@@ -1,4 +1,4 @@
-package mapReduce.artistPopularity
+package mapReduce.accumulate
 
 import org.apache.hadoop.mapreduce.Mapper
 import org.apache.hadoop.io.LongWritable
@@ -9,26 +9,28 @@ import song.Song
 
 
 /** Mapper class for getting total popularity for each artist represented in the data set */
-class ArtistPopMapper extends Mapper[LongWritable, Text, Text, IntWritable] {
+class AccumulateMapper extends Mapper[LongWritable, Text, Text, IntWritable] {
   override def map(
     key: LongWritable,
     value: Text,
     context: Mapper[LongWritable, Text, Text, IntWritable]#Context
   ): Unit = {
-
+    
     val line = value.toString()
+    val record = line.split('^')
 
-    if (line.split('^')(Song.POPULARITY) == "popularity") return
+    val conf = context.getConfiguration()
 
-    val artist = line.split('^')(Song.ARTISTS)
+    if (record(Song.VALENCE) == "valence") return                 // Skip the header line
+
+    val outputKey = record(Song.getIndex(conf.get("key")))
       .filter(_ != ']')
       .filter(_ != '[')
       .filter(_ != '\'')
       .toLowerCase()
       .capitalize
 
-    val popularity = line.split('^')(Song.POPULARITY)
-    println(popularity.toInt)
-    context.write(new Text(artist), new IntWritable(popularity.toInt))
+    val outputVal = record(Song.getIndex(conf.get("value"))).toInt
+    context.write(new Text(outputKey), new IntWritable(outputVal))
   }
 }

@@ -22,4 +22,27 @@ object Song {
   val RELEASE_DATE = 16
   val SPEECHINESS = 17
   val TEMPO = 18
+
+  def getIndex(field: String): Int = field.toUpperCase match {
+    case "VALENCE" => VALENCE
+    case "YEAR" => YEAR
+    case "ACOUSTICNESS" => ACOUSTICNESS
+    case "ARTISTS" => ARTISTS
+    case "DANCEABILITY" => DANCEABILITY
+    case "DURATION" => DURATION
+    case "ENERGY" => ENERGY
+    case "EXPLICIT" => EXPLICIT
+    case "ID" => ID
+    case "INSTRUMENTALNESS" => INSTRUMENTALNESS
+    case "KEY" => KEY
+    case "LIVENESS" => LIVENESS
+    case "LOUDNESS" => LOUDNESS
+    case "MODE" => MODE
+    case "NAME" => NAME
+    case "POPULARITY" => POPULARITY
+    case "RELEASE_DATE" => RELEASE_DATE
+    case "SPEECHINESS" => SPEECHINESS
+    case "TEMPO" => TEMPO
+    case _ => -1
+  }
 }
