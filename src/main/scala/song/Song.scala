@@ -22,4 +22,74 @@ object Song {
   val RELEASE_DATE = 16
   val SPEECHINESS = 17
   val TEMPO = 18
+
+  val keyArray = Array("C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A", "A#/Bb", "B")
+
+
+  def getIndex(field: String): Int = field.toUpperCase match {
+    case "VALENCE" => VALENCE
+    case "YEAR" => YEAR
+    case "ACOUSTICNESS" => ACOUSTICNESS
+    case "ARTISTS" => ARTISTS
+    case "DANCEABILITY" => DANCEABILITY
+    case "DURATION" => DURATION
+    case "ENERGY" => ENERGY
+    case "EXPLICIT" => EXPLICIT
+    case "ID" => ID
+    case "INSTRUMENTALNESS" => INSTRUMENTALNESS
+    case "KEY" => KEY
+    case "LIVENESS" => LIVENESS
+    case "LOUDNESS" => LOUDNESS
+    case "MODE" => MODE
+    case "NAME" => NAME
+    case "POPULARITY" => POPULARITY
+    case "RELEASE_DATE" => RELEASE_DATE
+    case "SPEECHINESS" => SPEECHINESS
+    case "TEMPO" => TEMPO
+    case _ => -1
+  }
+
+
+  def formatKey(field: String, data: String): String = getIndex(field) match {
+    case VALENCE | ACOUSTICNESS | DANCEABILITY |
+        ENERGY | INSTRUMENTALNESS | LIVENESS |
+        SPEECHINESS => (data.toDouble * 100).round.toString
+
+    case LOUDNESS | TEMPO => data.toDouble.round.toString
+
+    case ARTISTS => data.filter(_ != '\'').filter(_ != '[').filter(_ != ']').toLowerCase.capitalize
+
+    case KEY => {
+      if (data == -1) "No Key Data"
+      else keyArray(data.toInt)
+    }
+
+    case MODE => {
+      if (data.toInt == 0) "Minor"
+      else if (data.toInt == 1) "Major"
+      else "No Mode Data"
+    }
+
+    case EXPLICIT => {
+      if (data.toInt == 0) "No"
+      else if (data.toInt == 1) "Yes"
+      else "No Explicit Lyric Data"
+    }
+
+    case _ => data
+  }
+
+
+  def formatVal (field: String, data: String): Int = getIndex(field) match {
+    case YEAR | ARTISTS | EXPLICIT |
+        ID | KEY | MODE | NAME | RELEASE_DATE => println("Value must contain numerical data"); System.exit(-1); -1
+    
+    case VALENCE | ACOUSTICNESS | DANCEABILITY |
+        ENERGY | INSTRUMENTALNESS | LIVENESS |
+        SPEECHINESS => (data.toDouble * 100).round.toInt
+
+    case LOUDNESS | TEMPO => data.toDouble.round.toInt
+
+    case _ => data.toInt
+  }
 }
