@@ -23,14 +23,10 @@ class AccumulateMapper extends Mapper[LongWritable, Text, Text, IntWritable] {
 
     if (record(Song.VALENCE) == "valence") return                 // Skip the header line
 
-    val outputKey = record(Song.getIndex(conf.get("key")))
-      .filter(_ != ']')
-      .filter(_ != '[')
-      .filter(_ != '\'')
-      .toLowerCase()
-      .capitalize
+    val outputKey = Song.formatKey(conf.get("key"), record(Song.getIndex(conf.get("key"))))
 
-    val outputVal = record(Song.getIndex(conf.get("value"))).toInt
+    val outputVal = Song.formatVal(conf.get("value"), record(Song.getIndex(conf.get("value"))))
+
     context.write(new Text(outputKey), new IntWritable(outputVal))
   }
 }

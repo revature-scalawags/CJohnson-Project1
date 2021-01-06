@@ -15,15 +15,18 @@ class AverageMapper extends Mapper[LongWritable, Text, Text, IntWritable] {
     value: Text,
     context: Mapper[LongWritable, Text, Text, IntWritable]#Context
   ): Unit = {
+    
     val line = value.toString()
+    val record = line.split('^')
 
     val conf = context.getConfiguration()
     
     if (line.split('^')(Song.TEMPO) == "tempo") return      // Skip the header line
 
-    val tempo = line.split('^')(Song.getIndex(conf.get("key"))).toDouble.round.toInt.toString()
-    val dance = (line.split('^')(Song.getIndex(conf.get("value"))).toDouble * 100).round.toInt
+    val outputKey = Song.formatKey(conf.get("key"), record(Song.getIndex(conf.get("key"))))
 
-    context.write(new Text(tempo), new IntWritable(dance))
+    val outputVal = Song.formatVal(conf.get("value"), record(Song.getIndex(conf.get("value"))))
+
+    context.write(new Text(outputKey), new IntWritable(outputVal))
   }
 }

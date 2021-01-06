@@ -14,6 +14,7 @@ class AccumulateReducer extends Reducer[Text, IntWritable, Text, IntWritable] {
   ): Unit = {
     var value = 0
     values.forEach(value += _.get())
+    
     context.write(key, new IntWritable(value))
   }
 }

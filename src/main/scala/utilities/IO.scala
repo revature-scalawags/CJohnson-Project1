@@ -22,12 +22,13 @@ object IO {
   }
 
 
+
   def run(args: Array[String]): Unit = {
 
-    args(0) match {
+    args(0).toLowerCase match {
       case "-acc" => {
         checkArgCount(args, 3)
-        val job = JobUtil.buildJob(args, args(1).toUpperCase(), args(2).toUpperCase())
+        val job = JobUtil.buildJob(args, args(1).toUpperCase, args(2).toUpperCase)
         job.setMapperClass(classOf[AccumulateMapper])
         job.setReducerClass(classOf[AccumulateReducer])
         val success = job.waitForCompletion(true)
@@ -35,11 +36,15 @@ object IO {
       }
       case "-avg" => {
         checkArgCount(args, 3)
-        val job = JobUtil.buildJob(args, args(1).toUpperCase(), args(2).toUpperCase())
+        val job = JobUtil.buildJob(args, args(1).toUpperCase(), args(2).toUpperCase)
         job.setMapperClass(classOf[AverageMapper])
         job.setReducerClass(classOf[AverageReducer])
         val success = job.waitForCompletion(true)
         System.exit(if (success) 0 else 1)
+      }
+      case "-cnt" => {
+        checkArgCount(args, 2)
+        val job = JobUtil.buildJob(args, args(1).toUpperCase, "none")
       }
       case _ => {
         println("Usage: [operation] [input dir] [output dir]")
@@ -48,6 +53,7 @@ object IO {
       }
     }
   }
+
 
 
   def checkArgCount(args: Array[String], minArgsReq: Int): Unit = {
