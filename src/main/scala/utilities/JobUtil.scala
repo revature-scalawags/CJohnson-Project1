@@ -15,6 +15,7 @@ object JobUtil {
     val conf = new Configuration()
     conf.set("key", key)
     conf.set("value", value)
+    conf.set("operation", args(0))
 
     val job = new Job(conf)
 

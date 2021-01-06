@@ -1,5 +1,6 @@
 package utilities
 
+import mapReduce.{SpotifyMapper, SpotifyReducer}
 import mapReduce.accumulate.{AccumulateMapper, AccumulateReducer}
 import mapReduce.average.{AverageMapper, AverageReducer}
 
@@ -29,16 +30,16 @@ object IO {
       case "-acc" => {
         checkArgCount(args, 3)
         val job = JobUtil.buildJob(args, args(1).toUpperCase, args(2).toUpperCase)
-        job.setMapperClass(classOf[AccumulateMapper])
-        job.setReducerClass(classOf[AccumulateReducer])
+        job.setMapperClass(classOf[SpotifyMapper])
+        job.setReducerClass(classOf[SpotifyReducer])
         val success = job.waitForCompletion(true)
         System.exit(if (success) 0 else 1)
       }
       case "-avg" => {
         checkArgCount(args, 3)
         val job = JobUtil.buildJob(args, args(1).toUpperCase(), args(2).toUpperCase)
-        job.setMapperClass(classOf[AverageMapper])
-        job.setReducerClass(classOf[AverageReducer])
+        job.setMapperClass(classOf[SpotifyMapper])
+        job.setReducerClass(classOf[SpotifyReducer])
         val success = job.waitForCompletion(true)
         System.exit(if (success) 0 else 1)
       }
