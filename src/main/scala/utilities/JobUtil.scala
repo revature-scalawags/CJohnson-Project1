@@ -1,17 +1,19 @@
 package utilities
 
 import org.apache.hadoop.conf.Configuration
-import org.apache.hadoop.mapreduce.Job
-import org.apache.hadoop.mapreduce.lib.input.TextInputFormat
-import org.apache.hadoop.mapreduce.lib.input.FileInputFormat
 import org.apache.hadoop.fs.Path
-import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat
-import org.apache.hadoop.io.Text
 import org.apache.hadoop.io.IntWritable
+import org.apache.hadoop.io.Text
+import org.apache.hadoop.mapreduce.Job
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat
+import org.apache.hadoop.mapreduce.lib.input.TextInputFormat
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat
 
 import mapReduce.{SpotifyMapper, SpotifyReducer}
 
+
 object JobUtil {
+
 
   def buildJob(args: Array[String], minArgsReq: Int): Unit = {
 
@@ -58,6 +60,7 @@ object JobUtil {
     outPath.toString()
   }
 
+  
   def checkArgCount(args: Array[String], minArgsReq: Int): Unit = {
     if (minArgsReq == -1) {
       println("Run -help for assistance")

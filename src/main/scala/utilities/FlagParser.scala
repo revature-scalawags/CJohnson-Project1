@@ -2,6 +2,7 @@ package utilities
 
 object FlagParser {
 
+
   def run(args: Array[String]): Unit = {
 
     checkArgs(args)
@@ -38,5 +39,4 @@ object FlagParser {
     println("\t-tvd\t\tTempo vs Danceability: returns average danceability for each tempo represented")
     System.exit(0)
   }
-
 }
