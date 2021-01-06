@@ -12,9 +12,11 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat
 import mapReduce.{SpotifyMapper, SpotifyReducer}
 
 
+/** Provides utilities for building the MapReduce Job */
 object JobUtil {
 
 
+  /** Builds job with proper configuration based on user input */
   def buildJob(args: Array[String], minArgsReq: Int): Unit = {
 
     checkArgCount(args, minArgsReq)
@@ -22,9 +24,7 @@ object JobUtil {
     val conf = new Configuration()
     conf.set("operation", args(0).toUpperCase)
     conf.set("key", args(1).toUpperCase)
-
     if (minArgsReq == 3) conf.set("value", args(2).toUpperCase)
-    
 
     val job = new Job(conf)
 
@@ -46,6 +46,7 @@ object JobUtil {
   }
 
 
+  /** Builds output directory based on operation of relevant fields */
   def buildOutputDir (args: Array[String]): String = {
     val outPath = new StringBuilder("output/")
     if (args(0).equalsIgnoreCase("-cnt")) {
@@ -61,6 +62,7 @@ object JobUtil {
   }
 
   
+  /** Ensures the args array contains at least the minimum number of required arguments */
   def checkArgCount(args: Array[String], minArgsReq: Int): Unit = {
     if (minArgsReq == -1) {
       println("Run -help for assistance")
