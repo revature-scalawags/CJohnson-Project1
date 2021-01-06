@@ -5,10 +5,11 @@ import org.apache.hadoop.io.Text
 import org.apache.hadoop.mapreduce.Reducer
 
 
-/** Reducer class for getting average value for each occurence of the key in the data set */
+/** Reducer class for Spotify Analysis */
 class SpotifyReducer extends Reducer[Text, IntWritable, Text, IntWritable] {
   
   
+  /** Overrides reduce algorithm */
   override def reduce(
     key: Text,
     values: java.lang.Iterable[IntWritable],
@@ -22,12 +23,10 @@ class SpotifyReducer extends Reducer[Text, IntWritable, Text, IntWritable] {
     var count = 0
 
     operation match {
-
       case "-ACC" | "-CNT" =>  {
         values.forEach(value += _.get())
         context.write(key, new IntWritable(value))
       }
-
       case "-AVG" => {
         values.forEach({v => 
           value += v.get()         // Sum the value for each key

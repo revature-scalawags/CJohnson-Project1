@@ -1,12 +1,16 @@
 package utilities
 
+
+/** Parses user input arguments */
 object FlagParser {
 
 
+  /** validates input args and builds the Job */
   def run(args: Array[String]): Unit = {
 
     checkArgs(args)
 
+    // Stores the minimum number of required arguments in minArgsReq based on with operation was selected
     val minArgsReq = args(0).toLowerCase match {
       case "-acc" | "-avg" => 3
       case "-cnt" => 2
@@ -17,6 +21,7 @@ object FlagParser {
   }
 
 
+  /** Checks if args array is empty or begins with '-help' */
   def checkArgs(args: Array[String]): Unit = {
 
     // Notify user that arguments must be used
@@ -24,7 +29,6 @@ object FlagParser {
       println("Arguments required. Run -help for assistance")
       System.exit(-1)
     }
-
 
     // Print help
     if (args(0) == "-help") printHelp()

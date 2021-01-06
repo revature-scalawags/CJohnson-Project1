@@ -8,10 +8,11 @@ import org.apache.hadoop.mapreduce.Mapper
 import song.Song
 
 
-/** Mapper class for getting total popularity for each artist represented in the data set */
+/** Mapper class for Spotify Analysis */
 class SpotifyMapper extends Mapper[LongWritable, Text, Text, IntWritable] {
 
 
+  /** overrides map algorithm */
   override def map(
     key: LongWritable,
     value: Text,
@@ -21,11 +22,10 @@ class SpotifyMapper extends Mapper[LongWritable, Text, Text, IntWritable] {
     val line = value.toString()
     val record = line.split('^')
 
-    val conf = context.getConfiguration()
-
-    val operation = conf.get("operation")
-
     if (record(Song.VALENCE) == "valence") return       // Skip the header line
+
+    val conf = context.getConfiguration()
+    val operation = conf.get("operation")
 
     val outputKey = Song.formatKey(conf.get("key"), record(Song.getIndex(conf.get("key"))))
 

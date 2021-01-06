@@ -23,9 +23,11 @@ object Song {
   val SPEECHINESS = 17
   val TEMPO = 18
 
+  // keyArray contains an array of Key names
   val keyArray = Array("C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A", "A#/Bb", "B")
 
 
+  /** Gets the index of the field from field name */
   def getIndex(field: String): Int = field.toUpperCase match {
     case "VALENCE" => VALENCE
     case "YEAR" => YEAR
@@ -50,6 +52,7 @@ object Song {
   }
 
 
+  /** Formats the Key data to make it easily readable */
   def formatKey(field: String, data: String): String = getIndex(field) match {
     case VALENCE | ACOUSTICNESS | DANCEABILITY |
         ENERGY | INSTRUMENTALNESS | LIVENESS |
@@ -80,6 +83,7 @@ object Song {
   }
 
 
+  /** Validates and formats the Value data to make it easily readable */
   def formatVal (field: String, data: String): Int = getIndex(field) match {
     case YEAR | ARTISTS | EXPLICIT |
         ID | KEY | MODE | NAME | RELEASE_DATE => println("Value must contain numerical data"); System.exit(-1); -1
