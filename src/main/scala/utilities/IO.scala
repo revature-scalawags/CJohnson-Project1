@@ -46,6 +46,10 @@ object IO {
       case "-cnt" => {
         checkArgCount(args, 2)
         val job = JobUtil.buildJob(args, args(1).toUpperCase, "none")
+        job.setMapperClass(classOf[SpotifyMapper])
+        job.setReducerClass(classOf[SpotifyReducer])
+        val success = job.waitForCompletion(true)
+        System.exit(if (success) 0 else 1)
       }
       case _ => {
         println("Usage: [operation] [input dir] [output dir]")
