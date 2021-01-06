@@ -74,8 +74,8 @@ object Song {
     }
 
     case EXPLICIT => {
-      if (data.toInt == 0) "No"
-      else if (data.toInt == 1) "Yes"
+      if (data.toInt == 0) "No Explicit Lyrics"
+      else if (data.toInt == 1) "Explicit Lyrics"
       else "No Explicit Lyric Data"
     }
 
