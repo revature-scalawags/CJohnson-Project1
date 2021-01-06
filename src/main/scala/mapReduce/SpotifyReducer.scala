@@ -1,12 +1,13 @@
 package mapReduce
 
-import org.apache.hadoop.mapreduce.Reducer
-import org.apache.hadoop.io.Text
 import org.apache.hadoop.io.IntWritable
+import org.apache.hadoop.io.Text
+import org.apache.hadoop.mapreduce.Reducer
 
 
 /** Reducer class for getting average value for each occurence of the key in the data set */
 class SpotifyReducer extends Reducer[Text, IntWritable, Text, IntWritable] {
+  
   
   override def reduce(
     key: Text,
