@@ -23,7 +23,7 @@ class SpotifyMapper extends Mapper[LongWritable, Text, Text, IntWritable] {
 
     val operation = conf.get("operation")
 
-    if (record(Song.VALENCE) == "valence") return                 // Skip the header line
+    if (record(Song.VALENCE) == "valence") return       // Skip the header line
 
     val outputKey = Song.formatKey(conf.get("key"), record(Song.getIndex(conf.get("key"))))
 
