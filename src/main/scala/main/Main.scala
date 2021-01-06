@@ -1,9 +1,9 @@
 package main
 
-import utilities.IO
+import utilities.FlagParser
 
 
 /** Application using Scala and Hadoop to process Spotify song data */
 object Main extends App {
-   IO.checkArgs(args)
+   FlagParser.run(args)
 }

@@ -21,7 +21,7 @@ class SpotifyMapper extends Mapper[LongWritable, Text, Text, IntWritable] {
 
     val conf = context.getConfiguration()
 
-    val operation = conf.get("operation").toUpperCase
+    val operation = conf.get("operation")
 
     if (record(Song.VALENCE) == "valence") return                 // Skip the header line
 

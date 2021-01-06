@@ -9,13 +9,20 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat
 import org.apache.hadoop.io.Text
 import org.apache.hadoop.io.IntWritable
 
+import mapReduce.{SpotifyMapper, SpotifyReducer}
+
 object JobUtil {
 
-  def buildJob(args: Array[String], key: String, value: String): Job = {
+  def buildJob(args: Array[String], minArgsReq: Int): Unit = {
+
+    checkArgCount(args, minArgsReq)
+
     val conf = new Configuration()
-    conf.set("key", key)
-    conf.set("value", value)
-    conf.set("operation", args(0))
+    conf.set("operation", args(0).toUpperCase)
+    conf.set("key", args(1).toUpperCase)
+
+    if (minArgsReq == 3) conf.set("value", args(2).toUpperCase)
+    
 
     val job = new Job(conf)
 
@@ -29,7 +36,11 @@ object JobUtil {
     job.setOutputKeyClass(classOf[Text])
     job.setOutputValueClass(classOf[IntWritable])
 
-    job
+    job.setMapperClass(classOf[SpotifyMapper])
+    job.setReducerClass(classOf[SpotifyReducer])
+
+    val success = job.waitForCompletion(true)
+    System.exit(if (success) 0 else 1)
   }
 
 
@@ -45,5 +56,18 @@ object JobUtil {
     }
 
     outPath.toString()
+  }
+
+  def checkArgCount(args: Array[String], minArgsReq: Int): Unit = {
+    if (minArgsReq == -1) {
+      println("Run -help for assistance")
+      System.exit(-1)
+    }
+
+    if (args.length < minArgsReq) {
+      println("Too few arguments")
+      println("Run -help for assistance")
+      System.exit(-1)
+    }
   }
 }
