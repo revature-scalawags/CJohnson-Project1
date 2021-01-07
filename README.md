@@ -60,6 +60,7 @@ Returns the number of times entries of the key field occur in the data set
 
 example:
 > Returns a result set containing each artist and the number of times they appear in the data set
+
 > -count artists
 
 ## Notes
