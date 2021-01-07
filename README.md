@@ -59,6 +59,7 @@ Returns the number of times entries of the key field occur in the data set
 > -count [key field]
 
 example:
-> -count artists      -- Returns a result set containing each artist and the number of times they appear in the data set
+> Returns a result set containing each artist and the number of times they appear in the data set
+> -count artists
 
 ## Notes
