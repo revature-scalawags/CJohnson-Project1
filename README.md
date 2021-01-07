@@ -52,7 +52,7 @@ This application allows users to aggregate data based on:
 ## Usage
 ### Help
 Opens the help menu.
-> -help
+> `-help`
 
 ### COUNT
 Returns a result set containing the number of times entries of the key field occur in the data set
