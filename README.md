@@ -42,5 +42,23 @@ The data set includes the following fields (descriptions come from the Spotify A
 > tempo - The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration.
 
 ## Features
+This application allows users to aggregate data based on:
+> COUNT - The number of times a key field occurs in the data set
+
+> SUM - The total sum of a numeric value field based on a given key field
+
+> AVG - The average of a numeric value field based on a given key field
 
 ## Usage
+### Help
+Opens the help menu.
+> -help
+
+### COUNT
+Returns the number of times entries of the key field occur in the data set
+> -count [key field]
+
+example:
+> -count artists      -- Returns a result set containing each artist and the number of times they appear in the data set
+
+## Notes
