@@ -77,3 +77,7 @@ Example - (Result set contains each artists in the data set and the average popu
 
 ## Notes
 * The value fields must be numeric for sum and average aggregation functions
+* The output for each aggregation is stored in an automatically generated output folder, the name of which follows this convention:
+  > output/[operation]-[first 3 letters of key field]-[first 3 letters of value field]
+  example: output for `-count artists` will be stored in 'output/count-art/'
+  example: output for `-avg artists popularity` will be stored in 'output/avg-art-pop/'
