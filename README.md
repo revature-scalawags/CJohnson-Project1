@@ -55,12 +55,13 @@ Opens the help menu.
 > -help
 
 ### COUNT
-Returns the number of times entries of the key field occur in the data set
+Returns a result set containing the number of times entries of the key field occur in the data set
 > -count [key field]
 
-example:
-> Returns a result set containing each artist and the number of times they appear in the data set
-
+example - (Result set contains each artists and number of occurences for each in the data set):
 > -count artists
+
+### SUM
+
 
 ## Notes
