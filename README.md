@@ -56,7 +56,7 @@ Opens the help menu.
 
 ### COUNT
 Returns a result set containing the number of times entries of the key field occur in the data set
-> -count [key field]
+> `-count [key field]`
 
 example - (Result set contains each artist and number of occurences for each in the data set):
 > -count artists
