@@ -82,3 +82,5 @@ Example - (Result set contains each artists in the data set and the average popu
   
   * example: output for `-count artists` will be stored in 'output/count-art/'
   * example: output for `-avg artists popularity` will be stored in 'output/avg-art-pop/'
+
+* Data set compiled by Yamaç Eren Ay https://www.kaggle.com/yamaerenay/spotify-dataset-19212020-160k-tracks
