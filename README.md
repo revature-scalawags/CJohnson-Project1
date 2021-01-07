@@ -50,7 +50,7 @@ This application allows users to aggregate data based on:
 * AVG - The average of a numeric value field based on a given key field
 
 ## Usage
-### Help
+### HELP
 Opens the help menu.
 > `-help`
 
