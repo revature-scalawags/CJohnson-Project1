@@ -58,22 +58,22 @@ Opens the help menu.
 Returns a result set containing the number of times entries of the key field occur in the data set
 > `-count [key field]`
 
-example - (Result set contains each artist and number of occurences for each in the data set):
-> -count artists
+Example - (Result set contains each artist and number of occurences for each in the data set):
+> `-count artists`
 
 ### SUM
 Returns a result set containing each entry of the key field and the total sum of values in the value field associated with that key.
-> -sum [key field] [value field]
+> `-sum [key field] [value field]`
 
-example - (Result set contains each artist in the data set and the total cumulative popularity of each of their songs):
-> -sum artists popularity
+Example - (Result set contains each artist in the data set and the total cumulative popularity of each of their songs):
+> `-sum artists popularity`
 
 ### AVERAGE
 Returns a result set containing each entry of the key field and the average of values in the value field associated with that key.
-> -avg [key field] [value field]
+> `-avg [key field] [value field]`
 
-example - (Result set contains each artists in the data set and the average popularity of their songs):
-> -avg artists popularity
+Example - (Result set contains each artists in the data set and the average popularity of their songs):
+> `-avg artists popularity`
 
 ## Notes
 * The value fields must be numeric for sum and average aggregation functions
