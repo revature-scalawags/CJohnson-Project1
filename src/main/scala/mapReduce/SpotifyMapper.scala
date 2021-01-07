@@ -22,7 +22,7 @@ class SpotifyMapper extends Mapper[LongWritable, Text, Text, IntWritable] {
     val line = value.toString()
     val record = line.split('^')
 
-    if (record(Song.VALENCE) == "valence") return       // Skip the header line
+    if (record(Song.VALENCE).equalsIgnoreCase("valence")) return       // Skip the header line
 
     val conf = context.getConfiguration()
     val operation = conf.get("operation")
@@ -30,7 +30,7 @@ class SpotifyMapper extends Mapper[LongWritable, Text, Text, IntWritable] {
     val outputKey = Song.formatKey(conf.get("key"), record(Song.getIndex(conf.get("key"))))
 
     val outputVal = operation match {
-     case "-CNT" => 1 
+     case "-COUNT" => 1 
      case _ => Song.formatVal(conf.get("value"), record(Song.getIndex(conf.get("value"))))
     }
 

@@ -49,7 +49,7 @@ object JobUtil {
   /** Builds output directory based on operation of relevant fields */
   def buildOutputDir (args: Array[String]): String = {
     val outPath = new StringBuilder("output/")
-    if (args(0).equalsIgnoreCase("-cnt")) {
+    if (args(0).equalsIgnoreCase("-count")) {
       outPath.append(s"${args(0).substring(1).toLowerCase()}-")
       outPath.append(s"${args(1).substring(0,3).toLowerCase()}")
     } else {

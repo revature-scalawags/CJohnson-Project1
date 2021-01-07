@@ -23,7 +23,7 @@ class SpotifyReducer extends Reducer[Text, IntWritable, Text, IntWritable] {
     var count = 0
 
     operation match {
-      case "-ACC" | "-CNT" =>  {
+      case "-SUM" | "-COUNT" =>  {
         values.forEach(value += _.get())
         context.write(key, new IntWritable(value))
       }

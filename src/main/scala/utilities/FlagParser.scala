@@ -12,8 +12,8 @@ object FlagParser {
 
     // Stores the minimum number of required arguments in minArgsReq based on with operation was selected
     val minArgsReq = args(0).toLowerCase match {
-      case "-acc" | "-avg" => 3
-      case "-cnt" => 2
+      case "-sum" | "-avg" => 3
+      case "-count" => 2
       case _ => -1
     }
 
